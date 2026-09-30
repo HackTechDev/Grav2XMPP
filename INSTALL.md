@@ -2,7 +2,7 @@
 
 Le fonctionnement et les options sont décrits dans [README.md](README.md).
 
-Les chemins ci-dessous supposent que le projet est dans `~/APP/App2XMPP`.
+Les chemins ci-dessous supposent que le projet est dans `~/APP/Grav2XMPP`.
 Adapte-les si besoin.
 
 ## 1. Prérequis système
@@ -17,13 +17,13 @@ exemple `python3.14-venv`.
 ## 2. Environnement Python
 
 ```bash
-cd ~/APP/App2XMPP
+cd ~/APP/Grav2XMPP
 python3 -m venv .venv
 .venv/bin/pip install -r requirements.txt
 chmod +x grav2xmpp.py hooks/*
 ```
 
-Les hooks utilisent automatiquement `~/APP/App2XMPP/.venv/bin/python` s'il
+Les hooks utilisent automatiquement `~/APP/Grav2XMPP/.venv/bin/python` s'il
 existe, sinon `python3`.
 
 ## 3. Compte XMPP du bot
@@ -69,14 +69,14 @@ Depuis le dépôt git du blog Grav :
 
 ```bash
 cd /chemin/vers/depot-grav
-~/APP/App2XMPP/.venv/bin/python ~/APP/App2XMPP/grav2xmpp.py --dry-run -v
+~/APP/Grav2XMPP/.venv/bin/python ~/APP/Grav2XMPP/grav2xmpp.py --dry-run -v
 ```
 
 Le script affiche les messages qu'il aurait envoyés pour le dernier commit.
 Pour tester sur un commit qui a ajouté un article :
 
 ```bash
-~/APP/App2XMPP/.venv/bin/python ~/APP/App2XMPP/grav2xmpp.py --rev <sha> --dry-run -v
+~/APP/Grav2XMPP/.venv/bin/python ~/APP/Grav2XMPP/grav2xmpp.py --rev <sha> --dry-run -v
 ```
 
 Retire `--dry-run` pour faire un vrai envoi dans le salon.
@@ -88,7 +88,7 @@ Retire `--dry-run` pour faire un vrai envoi dans le salon.
 Le message part dès que tu commites un nouvel article.
 
 ```bash
-cp ~/APP/App2XMPP/hooks/post-commit /chemin/vers/depot-grav/.git/hooks/post-commit
+cp ~/APP/Grav2XMPP/hooks/post-commit /chemin/vers/depot-grav/.git/hooks/post-commit
 chmod +x /chemin/vers/depot-grav/.git/hooks/post-commit
 ```
 
@@ -99,7 +99,7 @@ dans `/chemin/vers/depot-grav/.git/grav2xmpp.log`.
 S'il existe déjà un hook `post-commit`, ajoute plutôt cette ligne à la fin :
 
 ```sh
-( ~/APP/App2XMPP/.venv/bin/python ~/APP/App2XMPP/grav2xmpp.py >>"$(git rev-parse --git-dir)/grav2xmpp.log" 2>&1 & )
+( ~/APP/Grav2XMPP/.venv/bin/python ~/APP/Grav2XMPP/grav2xmpp.py >>"$(git rev-parse --git-dir)/grav2xmpp.log" 2>&1 & )
 ```
 
 ### Cas B : push vers un dépôt sur le serveur
@@ -109,7 +109,7 @@ déployé à partir d'un dépôt nu. Sur le serveur, installe le projet (étapes
 4) puis :
 
 ```bash
-cp ~/APP/App2XMPP/hooks/post-receive /chemin/vers/depot.git/hooks/post-receive
+cp ~/APP/Grav2XMPP/hooks/post-receive /chemin/vers/depot.git/hooks/post-receive
 chmod +x /chemin/vers/depot.git/hooks/post-receive
 ```
 
@@ -122,7 +122,7 @@ traitements :
 
 ```sh
 input=$(cat)
-echo "$input" | ~/APP/App2XMPP/.venv/bin/python ~/APP/App2XMPP/grav2xmpp.py --post-receive
+echo "$input" | ~/APP/Grav2XMPP/.venv/bin/python ~/APP/Grav2XMPP/grav2xmpp.py --post-receive
 # ... puis ton déploiement, en réutilisant "$input" si besoin
 ```
 
@@ -131,7 +131,7 @@ annoncé deux fois (au commit, puis au push).
 
 ### Chemins personnalisés
 
-Si le projet n'est pas dans `~/APP/App2XMPP`, définis ces variables dans
+Si le projet n'est pas dans `~/APP/Grav2XMPP`, définis ces variables dans
 l'environnement du hook, ou modifie directement les deux premières lignes du
 hook :
 

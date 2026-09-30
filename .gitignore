@@ -4,3 +4,5 @@ __pycache__/
 # Contient le mot de passe XMPP
 grav2xmpp.ini
 *.log
+# Notes de session locales
+claude_task.md
