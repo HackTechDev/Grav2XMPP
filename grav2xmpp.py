@@ -288,7 +288,8 @@ def main() -> int:
 
     logging.basicConfig(
         level=logging.DEBUG if args.verbose else logging.INFO,
-        format="[grav2xmpp] %(levelname)s %(message)s",
+        format="%(asctime)s [grav2xmpp] %(levelname)s %(message)s",
+        datefmt="%Y-%m-%d %H:%M:%S",
     )
     cfg = Config.load(args.config)
 
@@ -304,7 +305,10 @@ def main() -> int:
         return 1
 
     if not articles:
-        log.debug("Aucun nouvel article détecté.")
+        revs = ["..".join(git("rev-parse", "--short", r).strip() for r in rng.split(".."))
+                for rng in ranges]
+        log.info("Commit %s : aucun nouvel article détecté.",
+                 ", ".join(revs) or "(aucun)")
         return 0
 
     messages = [cfg.message.format(title=a.title, url=a.url, path=a.path,

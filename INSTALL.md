@@ -159,5 +159,5 @@ Supprime ensuite l'article de test.
 | `JID/mot de passe XMPP manquants` | Fichier de configuration absent ou illisible |
 | `Authentification XMPP refusée` | Mauvais `jid` ou `password` |
 | `Échec de l'envoi XMPP : TimeoutError` | Serveur injoignable, ou salon qui refuse le bot (salon réservé aux membres, pseudo déjà pris) |
-| Aucun message, pas d'erreur | Le fichier n'a pas été reconnu comme un article. Lance le script avec `--dry-run -v` et vérifie `templates`, `blog_folder` et `published` |
+| `Commit … : aucun nouvel article détecté.` | Le commit ne fait que modifier des articles existants, ou le fichier n'a pas été reconnu comme un article. Lance le script avec `--dry-run -v` et vérifie `templates`, `blog_folder` et `published` |
 | Log vide | Le hook n'est pas exécutable (`chmod +x`) ou n'est pas dans `.git/hooks/` |
