@@ -1,0 +1,6 @@
+.venv/
+__pycache__/
+*.pyc
+# Contient le mot de passe XMPP
+grav2xmpp.ini
+*.log

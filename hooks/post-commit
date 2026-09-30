@@ -1,0 +1,11 @@
+#!/bin/sh
+# Hook git post-commit : notifie le salon XMPP des nouveaux articles Grav.
+# Installation : cp hooks/post-commit <depot-grav>/.git/hooks/ && chmod +x ...
+# L'envoi tourne en arrière-plan pour ne pas bloquer le commit.
+
+GRAV2XMPP="${GRAV2XMPP:-$HOME/APP/App2XMPP/grav2xmpp.py}"
+PYTHON="${GRAV2XMPP_PYTHON:-$HOME/APP/App2XMPP/.venv/bin/python}"
+[ -x "$PYTHON" ] || PYTHON=python3
+
+( "$PYTHON" "$GRAV2XMPP" --rev HEAD >>"$(git rev-parse --git-dir)/grav2xmpp.log" 2>&1 & )
+exit 0

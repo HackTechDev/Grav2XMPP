@@ -1,0 +1,21 @@
+# Copier vers ~/.config/grav2xmpp.ini puis : chmod 600 ~/.config/grav2xmpp.ini
+# Chaque valeur peut aussi être fournie par variable d'environnement
+# (GRAV2XMPP_JID, GRAV2XMPP_PASSWORD, GRAV2XMPP_ROOM, GRAV2XMPP_NICK,
+#  GRAV2XMPP_BASE_URL, GRAV2XMPP_TEMPLATES, GRAV2XMPP_BLOG_FOLDER, GRAV2XMPP_MESSAGE)
+
+[xmpp]
+# Compte XMPP utilisé par le bot (idéalement un compte dédié)
+jid = gravbot@tarentule.us
+password = changeme
+room = hacktechdev@conference.tarentule.us
+nick = GravBot
+
+[grav]
+# URL publique du site, utilisée pour construire le lien de l'article
+base_url = https://blog.tarentule.us
+# Templates considérés comme des articles (item.md, item.fr.md…)
+templates = item
+# Optionnel : ne notifier que les pages sous ce dossier (ex. 01.blog -> blog)
+blog_folder = blog
+# Variables disponibles : {title} {url} {path} {commit}
+message = 📝 Nouvel article sur le blog : {title}\n{url}

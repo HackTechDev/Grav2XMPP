@@ -1,0 +1,10 @@
+#!/bin/sh
+# Hook git post-receive (dépôt distant / serveur) : notifie le salon XMPP
+# des nouveaux articles Grav reçus lors d'un push.
+
+GRAV2XMPP="${GRAV2XMPP:-$HOME/APP/App2XMPP/grav2xmpp.py}"
+PYTHON="${GRAV2XMPP_PYTHON:-$HOME/APP/App2XMPP/.venv/bin/python}"
+[ -x "$PYTHON" ] || PYTHON=python3
+
+"$PYTHON" "$GRAV2XMPP" --post-receive || echo "grav2xmpp : échec de la notification XMPP" >&2
+exit 0
