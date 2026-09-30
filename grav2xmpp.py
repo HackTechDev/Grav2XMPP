@@ -229,7 +229,7 @@ async def send_to_muc(cfg: Config, messages: list[str], timeout: float = 30) -> 
                 await self.get_roster()
                 self.send_presence()
                 await self.plugin["xep_0045"].join_muc_wait(
-                    cfg.room, cfg.nick, maxhistory=0, timeout=timeout
+                    cfg.room, cfg.nick, maxstanzas=0, timeout=timeout
                 )
                 for body in messages:
                     self.send_message(mto=cfg.room, mbody=body, mtype="groupchat")
