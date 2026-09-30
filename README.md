@@ -53,6 +53,33 @@ cas quand il est appelé par un hook.
 Codes de retour : `0` si tout s'est bien passé ou s'il n'y avait aucun nouvel
 article, `1` en cas d'erreur (git, configuration ou envoi XMPP).
 
+## Journal
+
+Le hook `post-commit` écrit la sortie du script dans `.git/grav2xmpp.log`, dans
+le dépôt du blog. Chaque exécution y ajoute au moins une ligne horodatée, ce qui
+permet de vérifier que le hook a bien tourné :
+
+```
+2026-09-30 21:40:12 [grav2xmpp] INFO Commit 1bf4217 : aucun nouvel article détecté.
+2026-09-30 21:52:47 [grav2xmpp] INFO Message → hacktechdev@conference.tarentule.us :
+📝 Nouvel article sur le blog : Mon premier article
+https://blog.tarentule.us/blog/hello-xmpp
+2026-09-30 21:52:49 [grav2xmpp] INFO 1 notification(s) envoyée(s).
+2026-09-30 22:05:03 [grav2xmpp] INFO Message → hacktechdev@conference.tarentule.us :
+📝 Nouvel article sur le blog : Un autre article
+https://blog.tarentule.us/blog/un-autre-article
+2026-09-30 22:05:33 [grav2xmpp] ERROR Échec de l'envoi XMPP : TimeoutError
+```
+
+- La première ligne correspond à un commit qui ne fait que modifier des pages.
+- Le bloc suivant correspond à un nouvel article, annoncé avec succès.
+- Le dernier bloc correspond à un envoi en échec (ici, serveur injoignable).
+  Les causes possibles sont listées dans la section *Dépannage* d'[INSTALL.md](INSTALL.md).
+
+Avec `-v`, le log contient aussi le détail des échanges XMPP, utile pour le
+diagnostic. Le hook `post-receive` n'écrit pas dans ce fichier : sa sortie
+s'affiche dans celle de `git push`.
+
 ## Configuration
 
 Le fichier INI est cherché dans cet ordre :
